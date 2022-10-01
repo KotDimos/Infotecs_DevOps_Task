@@ -1,0 +1,12 @@
+FROM debian:11.4-slim
+
+RUN apt-get update -y && \
+    apt-get install gcc make cmake -y
+
+WORKDIR /app
+
+COPY ./sqlite-amalgamation-3260000/ /app/
+
+RUN gcc -shared -o sqlight.so -fPIC shell.c sqlite3.c sqlite3ext.h sqlite3.h
+
+CMD ["/bin/bash"]

@@ -1,0 +1,5 @@
+- hosts: debian
+  roles:
+    - install-docker
+    - sqlite3-build
+    - create-docker

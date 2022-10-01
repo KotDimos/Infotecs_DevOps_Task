@@ -1,0 +1,19 @@
+---
+- name: Copy Dockerfile.sqlite3
+  ansible.builtin.copy:
+    src: "Dockerfile.sqlite3"
+    dest: "~/Dockerfile.sqlite3"
+
+- name: Build Docker
+  community.docker.docker_image:
+    name: "{{ image_name }}"
+    build:
+      dockerfile: "Dockerfile.sqlite3"
+      path: "~/"
+    source: build
+
+- name: Docker run
+  community.docker.docker_container:
+    name: test
+    image: "{{ image_name }}"
+  

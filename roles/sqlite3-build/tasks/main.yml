@@ -1,0 +1,24 @@
+---
+- name: Install packages
+  ansible.builtin.apt:
+    name:
+      - cmake
+      - make
+      - gcc
+      - g++
+      - zip
+    state: latest
+
+- name: Unzip sqlite3
+  ansible.builtin.unarchive:
+    src: https://www.sqlite.org/2018/sqlite-amalgamation-3260000.zip
+    dest: ~/
+    remote_src: yes
+
+- name: Copy CMakeLists.txt
+  ansible.builtin.copy:
+    src: CMakeLists.txt
+    dest: ~/CMakeLists.txt
+    mode: '0644'
+
+
